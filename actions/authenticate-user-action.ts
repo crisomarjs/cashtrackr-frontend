@@ -1,6 +1,7 @@
 "use server"
 import { ErrorResponseShcema, LoginSchema } from "@/src/schemas"
 import {cookies} from "next/headers"
+import { redirect } from "next/navigation"
 
 type ActionStateType = {
     errors: string[]
@@ -50,7 +51,5 @@ export async function authenticate(prevState: ActionStateType, formData: FormDat
         path:'/'
     })
 
-    return {
-        errors: []
-    }
+    redirect('/admin')
 }
