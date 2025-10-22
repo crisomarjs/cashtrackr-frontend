@@ -1,11 +1,32 @@
 "use client"
+import { register } from "@/actions/create-account-action"
+import { useActionState, useEffect, useRef } from "react"
+import ErrorMessage from "../ui/ErrorMessage"
+import SuccessMesage from "../ui/SuccessMesage"
 
 export default function ResgisterForm() {
+    const ref = useRef<HTMLFormElement>(null)
+
+    const [state, dispatch] = useActionState(register, {
+        errors: [],
+        success: ''
+    })
+
+    useEffect(() => {
+        if(state.success){
+            ref.current?.reset()
+        }
+    }, [state])
+
     return (
         <form
+            ref={ref}
             className="mt-14 space-y-5"
             noValidate
+            action={dispatch}
         >
+            {state.errors.map(error => <ErrorMessage>{error}</ErrorMessage>)}
+            {state.success && <SuccessMesage>{state.success}</SuccessMesage>}
             <div className="flex flex-col gap-2">
                 <label
                     className="font-bold text-2xl"
