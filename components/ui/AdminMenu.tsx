@@ -7,6 +7,7 @@ import Link from 'next/link'
 import type { User } from '@/src/schemas'
 import { logout } from '@/actions/logout-user-action'
 
+
 export default function AdminMenu({user}: {user: User}) {
 
   return (
