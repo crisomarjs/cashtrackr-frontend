@@ -17,14 +17,8 @@ export default function CreateBudgetForm() {
 
     useEffect(() => {
         if (state.success) {
-            toast.success(state.success, {
-                onClose: () => {
-                    router.push('/admin')
-                },
-                onClick: () => {
-                    router.push('/admin')
-                }
-            })
+            toast.success(state.success)
+            router.push('/admin')
         }
     }, [state])
 
@@ -38,7 +32,7 @@ export default function CreateBudgetForm() {
             {state.errors.map(error => <ErrorMessage key={error}>{error}</ErrorMessage>)}
 
             <BudgetForm />
-            
+
             <input
                 type="submit"
                 className="bg-amber-500 w-full p-3 text-white uppercase font-bold hover:bg-amber-600 cursor-pointer transition-colors"
